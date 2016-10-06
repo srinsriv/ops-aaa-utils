@@ -175,14 +175,11 @@ int main(int argc, char **argv) {
 			case 'C':
 				do_command_author = 1;
 				break;
-<<<<<<< HEAD
 			case 'G':
 				get_privilege_level = 1;
 				break;
-=======
 			case 'V':
 				showversion(argv[0]);
->>>>>>> parent of 3411824... Refactoring code within tacacs+/radius pam libs
 			case 'h':
 				showusage(argv[0]);
 			case 'u':
