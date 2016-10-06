@@ -40,7 +40,16 @@
 #include <time.h>
 #include <unistd.h>
 #include <strings.h>
-#include <openssl/rand.h>
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#if defined(HAVE_OPENSSL_RAND_H) && defined(HAVE_LIBCRYPTO)
+# include <openssl/rand.h>
+#else
+# include "magic.h"
+#endif
 
 #include <sys/types.h>
 #include "nl-utils.h"
@@ -790,7 +799,11 @@ int pam_sm_acct_mgmt(pam_handle_t * pamh, int flags, int argc,
 PAM_EXTERN
 int pam_sm_open_session(pam_handle_t * pamh, int flags, int argc,
 		const char **argv) {
-  RAND_bytes((unsigned char *) &task_id, sizeof(task_id));
+#if defined(HAVE_OPENSSL_RAND_H) && defined(HAVE_LIBCRYPTO)
+      RAND_pseudo_bytes((unsigned char *) &task_id, sizeof(task_id));
+#else
+          task_id=(short int) magic();
+#endif
 	return _pam_account(pamh, argc, argv, TAC_PLUS_ACCT_FLAG_START, NULL);
 } /* pam_sm_open_session */
 

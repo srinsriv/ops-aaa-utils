@@ -19,6 +19,7 @@
  */
 
 #include "libtac.h"
+#include "md5.h"
 
 /* this function sends a continue packet do TACACS+ server, asking
  * for validation of given password
