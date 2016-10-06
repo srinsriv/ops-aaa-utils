@@ -35,7 +35,7 @@
 
 #include "tacplus.h"
 #include "libtac.h"
-#include "libtac/support.h"
+#include "support.h"
 #include "nl-utils.h"
 
 /* Prompt displayed when asking for password */
