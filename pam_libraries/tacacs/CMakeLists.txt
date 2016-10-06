@@ -62,9 +62,10 @@ add_executable(tacc
   libtac/lib/cont_s.c
   libtac/lib/authen_s.c
   libtac/lib/header.c
-  libtac/author_utils.c
-  libtac/pam_tacplus.c
-  libtac/support.c)
+  libtac/lib/version.c
+  author_utils.c
+  pam_tacplus.c
+  support.c)
 
 target_link_libraries(tacc PUBLIC ${OVSCOMMON_LIBRARIES}
   util crypt pthread readline audit opsutils crypto pam pam_misc)

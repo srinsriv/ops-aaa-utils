@@ -57,6 +57,7 @@ void sighandler(int sig);
 void showusage(char *argv0);
 unsigned long getservername(char *serv);
 void showusage(char *progname);
+void showversion(char *progname);
 void authenticate(const struct addrinfo *tac_server, const char *tac_secret,
 		const char *user, const char *pass, const char *tty,
 		const char *remote_addr,
@@ -77,8 +78,10 @@ static struct option long_options[] =
 		/* operation */
 		{ "authenticate", no_argument, NULL, 'T' }, { "authorize", no_argument,
 				NULL, 'R' }, { "account", no_argument, NULL, 'A' }, { "cmd_author",
-				no_argument, NULL, 'C' }, { "get_priv",
-                                no_argument, NULL, 'G' }, {"help", no_argument, NULL, 'h' },
+				no_argument, NULL, 'C' }, { "get_priv", no_argument, NULL, 'G' },
+				{ "version",
+				no_argument, NULL, 'V' }, { "cmd_author",
+				no_argument, NULL, 'C' }, {"help", no_argument, NULL, 'h' },
 
 		/* data */
 		{ "username", required_argument, NULL, 'u' }, { "remote",
@@ -167,9 +170,14 @@ int main(int argc, char **argv) {
 			case 'C':
 				do_command_author = 1;
 				break;
+<<<<<<< HEAD
 			case 'G':
 				get_privilege_level = 1;
 				break;
+=======
+			case 'V':
+				showversion(argv[0]);
+>>>>>>> parent of 3411824... Refactoring code within tacacs+/radius pam libs
 			case 'h':
 				showusage(argv[0]);
 			case 'u':
@@ -507,8 +515,8 @@ void showusage(char *progname) {
 	a = rindex(progname, '/');
 	progname = (a == NULL) ? progname : ++a;
 
-	printf("%s -- simple TACACS+ client and login\n",
-			progname);
+	printf("%s -- simple TACACS+ client and login, version %u.%u.%u\n",
+			progname, tac_ver_major, tac_ver_minor, tac_ver_patch);
 	printf("Copyright 1997-2016 by Pawel Krawczyk <pawel.krawczyk@hush.com>\n");
 	printf("Usage: %s option [option, ...]\n\n", progname);
 	printf(" Action:\n");
@@ -519,6 +527,7 @@ void showusage(char *progname) {
 	printf("  -A, --account       account session beginning and end\n");
 	printf("  -G, --get_priv      get privilege level for the user\n");
 	printf("  -h, --help          display this help and exit\n");
+	printf("  -V, --version       display version number and exit\n\n");
 	printf(" Data:\n");
 	printf("  -u, --username      remote user name\n");
 	printf("  -p, --password      remote user password\n");
@@ -542,6 +551,17 @@ void showusage(char *progname) {
 			"  tacc -TRA -u test1 -p test1 -s localhost -r 1.1.1.1 -k test1 -S ppp -P ip\n");
 
 	exit(EXIT_ERR);
+}
+
+void showversion(char *progname) {
+	char *a;
+
+	a = rindex(progname, '/');
+	progname = (a == NULL) ? progname : ++a;
+
+	printf("%s %u.%u.%u\n", progname, tac_ver_major, tac_ver_minor,
+			tac_ver_patch);
+	exit(EXIT_OK);
 }
 
 unsigned long getservername(char *serv) {
