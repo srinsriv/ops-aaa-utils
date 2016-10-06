@@ -66,6 +66,7 @@ set (SOURCES_LIB_PAM_TACACS
   lib/hdr_check.c
   lib/read_wait.c
   lib/acct_r.c
+  lib/xalloc.c
   lib/cont_s.c
   lib/md5.c
   lib/authen_s.c

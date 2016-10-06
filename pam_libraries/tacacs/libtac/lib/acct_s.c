@@ -20,6 +20,7 @@
  */
 
 #include "libtac.h"
+#include "xalloc.h"
 char *tac_acct_flag2str(int flag) {
     switch(flag) {
         case TAC_PLUS_ACCT_FLAG_MORE:

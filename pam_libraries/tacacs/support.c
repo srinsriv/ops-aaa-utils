@@ -208,11 +208,11 @@ int _pam_parse (int argc, const char **argv) {
         } else if (!strcmp (*argv, "try_first_pass")) {
             ctrl |= PAM_TAC_TRY_FIRST_PASS;
         } else if (!strncmp (*argv, "service=", 8)) { /* author & acct */
-            strncpy (tac_service, *argv + 8, sizeof(tac_service));
+            xstrcpy (tac_service, *argv + 8, sizeof(tac_service));
         } else if (!strncmp (*argv, "protocol=", 9)) { /* author & acct */
-            strncpy (tac_protocol, *argv + 9, sizeof(tac_protocol));
+            xstrcpy (tac_protocol, *argv + 9, sizeof(tac_protocol));
         } else if (!strncmp (*argv, "prompt=", 7)) { /* authentication */
-            strncpy (tac_prompt, *argv + 7, sizeof(tac_prompt));
+            xstrcpy (tac_prompt, *argv + 7, sizeof(tac_prompt));
             /* Replace _ with space */
             int chr;
             for (chr = 0; chr < strlen(tac_prompt); chr++) {
@@ -221,7 +221,7 @@ int _pam_parse (int argc, const char **argv) {
                 }
             }
         } else if (!strncmp (*argv, "login=", 6)) {
-            strncpy (tac_login, *argv + 6, sizeof(tac_login));
+            xstrcpy (tac_login, *argv + 6, sizeof(tac_login));
         } else if (!strcmp (*argv, "acct_all")) {
             ctrl |= PAM_TAC_ACCT;
         } else if (!strcmp (*argv, "bypass_acct")) {

@@ -19,6 +19,7 @@
  * See `CHANGES' file for revision history.
  */
 
+#include "xalloc.h"
 #include "libtac.h"
 #include "messages.h"
 
